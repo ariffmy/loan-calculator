@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kalkulator Pinjaman Malaysia untuk anggaran ansuran rumah, kenderaan dan pinjaman peribadi.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Kalkulator Pinjaman Malaysia | ariff.my</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" integrity="sha384-XGjxtQfXaH2tnPFa9x+ruJTuLE3Aa6LhHSWRr1XeTyhezb4abCG4ccI5AkVDxqC+" crossorigin="anonymous">
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+  <header class="app-hero">
+    <div class="container">
+      <div class="hero-shell">
+        <div>
+          <span class="trust-badge">Percuma • Tanpa Pendaftaran</span>
+          <h1>Kalkulator Pinjaman Malaysia</h1>
+          <p>Kira anggaran ansuran bulanan untuk pinjaman rumah, kenderaan dan pinjaman peribadi.</p>
+        </div>
+        <div class="hero-note" aria-label="Maklumat privasi">
+          <i class="bi bi-shield-check"></i>
+          <span>Semua pengiraan dibuat terus dalam pelayar anda.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container app-main">
+    <section class="calculator-card">
+      <nav class="loan-tabs no-print" aria-label="Pilih jenis pinjaman">
+        <button class="loan-tab active" type="button" data-loan-tab="home" aria-pressed="true">
+          <i class="bi bi-house-door"></i>
+          <span>Rumah</span>
+        </button>
+        <button class="loan-tab" type="button" data-loan-tab="vehicle" aria-pressed="false">
+          <i class="bi bi-car-front"></i>
+          <span>Kereta</span>
+        </button>
+        <button class="loan-tab" type="button" data-loan-tab="personal" aria-pressed="false">
+          <i class="bi bi-person-vcard"></i>
+          <span>Pinjaman Peribadi</span>
+        </button>
+      </nav>
+
+      <div class="row g-4 align-items-start">
+        <div class="col-lg-5">
+          <section class="form-panel" aria-labelledby="form-title">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Maklumat pinjaman</p>
+                <h2 id="form-title">Pinjaman Rumah</h2>
+              </div>
+              <span class="loan-icon" id="active-loan-icon" aria-hidden="true"><i class="bi bi-house-door"></i></span>
+            </div>
+
+            <form id="loan-form" novalidate>
+              <div class="loan-form-section active" data-form-section="home">
+                <div class="mb-3">
+                  <label class="form-label" for="home-price">Harga rumah</label>
+                  <div class="input-group input-group-soft">
+                    <span class="input-group-text">RM</span>
+                    <input class="form-control money-input" id="home-price" data-money-input inputmode="decimal" autocomplete="off" value="500000">
+                  </div>
+                  <div class="invalid-feedback d-block" data-error-for="home-price"></div>
+                </div>
+
+                <div class="row g-3">
+                  <div class="col-sm-6">
+                    <label class="form-label" for="home-deposit-rm">Deposit dalam RM</label>
+                    <div class="input-group input-group-soft">
+                      <span class="input-group-text">RM</span>
+                      <input class="form-control money-input" id="home-deposit-rm" data-money-input inputmode="decimal" autocomplete="off" value="50000">
+                    </div>
+                    <div class="invalid-feedback d-block" data-error-for="home-deposit-rm"></div>
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="form-label" for="home-deposit-percent">Deposit dalam peratus</label>
+                    <div class="input-group input-group-soft">
+                      <input class="form-control" id="home-deposit-percent" inputmode="decimal" autocomplete="off" value="10">
+                      <span class="input-group-text">%</span>
+                    </div>
+                    <div class="invalid-feedback d-block" data-error-for="home-deposit-percent"></div>
+                  </div>
+                </div>
+
+                <div class="mb-3 mt-3">
+                  <label class="form-label" for="home-loan-amount">Jumlah pinjaman</label>
+                  <div class="input-group input-group-soft">
+                    <span class="input-group-text">RM</span>
+                    <input class="form-control money-input" id="home-loan-amount" data-money-input inputmode="decimal" autocomplete="off" value="450000">
+                  </div>
+                  <div class="form-text">Dikira automatik, tetapi boleh diubah jika perlu.</div>
+                  <div class="invalid-feedback d-block" data-error-for="home-loan-amount"></div>
+                </div>
+
+                <div class="row g-3">
+                  <div class="col-sm-6">
+                    <label class="form-label" for="home-rate">Kadar faedah tahunan</label>
+                    <div class="input-group input-group-soft">
+                      <input class="form-control" id="home-rate" inputmode="decimal" autocomplete="off" value="4.20">
+                      <span class="input-group-text">% setahun</span>
+                    </div>
+                    <div class="invalid-feedback d-block" data-error-for="home-rate"></div>
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="form-label" for="home-years">Tempoh pinjaman</label>
+                    <select class="form-select" id="home-years"></select>
+                    <div class="invalid-feedback d-block" data-error-for="home-years"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="loan-form-section" data-form-section="vehicle">
+                <div class="mb-3">
+                  <label class="form-label" for="vehicle-price">Harga kenderaan</label>
+                  <div class="input-group input-group-soft">
+                    <span class="input-group-text">RM</span>
+                    <input class="form-control money-input" id="vehicle-price" data-money-input inputmode="decimal" autocomplete="off" value="100000">
+                  </div>
+                  <div class="invalid-feedback d-block" data-error-for="vehicle-price"></div>
+                </div>
+
+                <div class="row g-3">
+                  <div class="col-sm-6">
+                    <label class="form-label" for="vehicle-deposit-rm">Deposit dalam RM</label>
+                    <div class="input-group input-group-soft">
+                      <span class="input-group-text">RM</span>
+                      <input class="form-control money-input" id="vehicle-deposit-rm" data-money-input inputmode="decimal" autocomplete="off" value="10000">
+                    </div>
+                    <div class="invalid-feedback d-block" data-error-for="vehicle-deposit-rm"></div>
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="form-label" for="vehicle-deposit-percent">Deposit dalam peratus</label>
+                    <div class="input-group input-group-soft">
+                      <input class="form-control" id="vehicle-deposit-percent" inputmode="decimal" autocomplete="off" value="10">
+                      <span class="input-group-text">%</span>
+                    </div>
+                    <div class="invalid-feedback d-block" data-error-for="vehicle-deposit-percent"></div>
+                  </div>
+                </div>
+
+                <div class="mb-3 mt-3">
+                  <label class="form-label" for="vehicle-loan-amount">Jumlah pinjaman</label>
+                  <div class="input-group input-group-soft">
+                    <span class="input-group-text">RM</span>
+                    <input class="form-control money-input" id="vehicle-loan-amount" data-money-input inputmode="decimal" autocomplete="off" value="90000">
+                  </div>
+                  <div class="form-text">Dikira automatik, tetapi boleh diubah jika perlu.</div>
+                  <div class="invalid-feedback d-block" data-error-for="vehicle-loan-amount"></div>
+                </div>
+
+                <div class="row g-3">
+                  <div class="col-sm-6">
+                    <label class="form-label" for="vehicle-rate">Kadar faedah tetap tahunan</label>
+                    <div class="input-group input-group-soft">
+                      <input class="form-control" id="vehicle-rate" inputmode="decimal" autocomplete="off" value="3.00">
+                      <span class="input-group-text">% setahun</span>
+                    </div>
+                    <div class="invalid-feedback d-block" data-error-for="vehicle-rate"></div>
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="form-label" for="vehicle-years">Tempoh pinjaman</label>
+                    <select class="form-select" id="vehicle-years"></select>
+                    <div class="invalid-feedback d-block" data-error-for="vehicle-years"></div>
+                  </div>
+                </div>
+
+                <p class="info-note mt-3">
+                  Kebanyakan pinjaman kenderaan di Malaysia menggunakan kaedah kadar rata. Pengiraan sebenar mungkin berbeza mengikut bank atau institusi kewangan.
+                </p>
+              </div>
+
+              <div class="loan-form-section" data-form-section="personal">
+                <div class="mb-3">
+                  <label class="form-label" for="personal-loan-amount">Jumlah pinjaman</label>
+                  <div class="input-group input-group-soft">
+                    <span class="input-group-text">RM</span>
+                    <input class="form-control money-input" id="personal-loan-amount" data-money-input inputmode="decimal" autocomplete="off" value="50000">
+                  </div>
+                  <div class="invalid-feedback d-block" data-error-for="personal-loan-amount"></div>
+                </div>
+
+                <div class="row g-3">
+                  <div class="col-sm-6">
+                    <label class="form-label" for="personal-rate">Kadar faedah tahunan</label>
+                    <div class="input-group input-group-soft">
+                      <input class="form-control" id="personal-rate" inputmode="decimal" autocomplete="off" value="6.50">
+                      <span class="input-group-text">% setahun</span>
+                    </div>
+                    <div class="invalid-feedback d-block" data-error-for="personal-rate"></div>
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="form-label" for="personal-years">Tempoh pinjaman</label>
+                    <select class="form-select" id="personal-years"></select>
+                    <div class="invalid-feedback d-block" data-error-for="personal-years"></div>
+                  </div>
+                </div>
+
+                <fieldset class="mt-3">
+                  <legend class="form-label">Jenis pengiraan</legend>
+                  <div class="segmented-control" role="radiogroup" aria-label="Jenis pengiraan pinjaman peribadi">
+                    <input type="radio" class="btn-check" name="personal-type" id="personal-flat" value="flat" checked>
+                    <label class="segment-option" for="personal-flat">Kadar rata</label>
+                    <input type="radio" class="btn-check" name="personal-type" id="personal-reducing" value="reducing">
+                    <label class="segment-option" for="personal-reducing">Baki berkurangan</label>
+                  </div>
+                </fieldset>
+
+                <p class="info-note mt-3">
+                  Kadar rata mengira faedah berdasarkan prinsipal asal sepanjang tempoh pinjaman. Baki berkurangan mengira ansuran menggunakan baki pinjaman yang semakin menurun.
+                </p>
+              </div>
+
+              <div class="optional-box mt-4">
+                <div class="section-title-row">
+                  <div>
+                    <p class="eyebrow">Pilihan</p>
+                    <h3>Penilaian Komitmen Bulanan</h3>
+                  </div>
+                  <i class="bi bi-wallet2" aria-hidden="true"></i>
+                </div>
+                <div class="row g-3">
+                  <div class="col-sm-6">
+                    <label class="form-label" for="monthly-income">Pendapatan bersih bulanan</label>
+                    <div class="input-group input-group-soft">
+                      <span class="input-group-text">RM</span>
+                      <input class="form-control money-input" id="monthly-income" data-money-input inputmode="decimal" autocomplete="off" placeholder="Contoh: 6000">
+                    </div>
+                    <div class="invalid-feedback d-block" data-error-for="monthly-income"></div>
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="form-label" for="existing-commitment">Komitmen sedia ada bulanan</label>
+                    <div class="input-group input-group-soft">
+                      <span class="input-group-text">RM</span>
+                      <input class="form-control money-input" id="existing-commitment" data-money-input inputmode="decimal" autocomplete="off" placeholder="Contoh: 1200">
+                    </div>
+                    <div class="invalid-feedback d-block" data-error-for="existing-commitment"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="action-row no-print">
+                <button type="button" class="btn btn-primary" id="recalculate-btn">
+                  <i class="bi bi-calculator"></i>
+                  Kira Semula
+                </button>
+                <button type="button" class="btn btn-outline-secondary" id="reset-btn">
+                  <i class="bi bi-arrow-counterclockwise"></i>
+                  Tetapkan Semula
+                </button>
+                <button type="button" class="btn btn-outline-secondary" id="print-btn">
+                  <i class="bi bi-printer"></i>
+                  Cetak Keputusan
+                </button>
+                <button type="button" class="btn btn-outline-secondary" id="copy-btn">
+                  <i class="bi bi-clipboard-check"></i>
+                  Salin Ringkasan
+                </button>
+              </div>
+            </form>
+          </section>
+        </div>
+
+        <div class="col-lg-7">
+          <section class="result-panel" aria-labelledby="result-title">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Keputusan semasa</p>
+                <h2 id="result-title">Ringkasan Pinjaman Rumah</h2>
+              </div>
+              <span class="calculated-at" id="calculated-at">-</span>
+            </div>
+
+            <div class="main-result-card">
+              <div>
+                <span class="result-label"><i class="bi bi-calendar2-check"></i> Anggaran Ansuran Bulanan</span>
+                <strong id="monthly-payment">RM 0.00</strong>
+              </div>
+              <p id="result-subtitle">Berdasarkan nilai contoh semasa.</p>
+            </div>
+
+            <div class="result-grid" id="result-grid" aria-live="polite"></div>
+
+            <div class="chart-section">
+              <div>
+                <h3>Pecahan Prinsipal dan Faedah</h3>
+                <p id="chart-description">Carta menunjukkan anggaran pecahan prinsipal dan faedah bagi pinjaman semasa.</p>
+              </div>
+              <div class="chart-wrap">
+                <canvas id="principal-interest-chart" aria-label="Carta pecahan prinsipal dan faedah" role="img"></canvas>
+              </div>
+            </div>
+
+            <div class="dsr-card" id="dsr-card">
+              <div class="section-title-row">
+                <div>
+                  <p class="eyebrow">Komitmen</p>
+                  <h3>Anggaran DSR</h3>
+                </div>
+                <span class="dsr-pill" id="dsr-category">Belum dikira</span>
+              </div>
+              <div class="dsr-values">
+                <div>
+                  <span>DSR</span>
+                  <strong id="dsr-percent">-</strong>
+                </div>
+                <div>
+                  <span>Komitmen selepas pinjaman</span>
+                  <strong id="dsr-total">-</strong>
+                </div>
+                <div>
+                  <span>Baki pendapatan</span>
+                  <strong id="dsr-balance">-</strong>
+                </div>
+              </div>
+              <p>Kelulusan sebenar bergantung kepada polisi bank, profil kredit dan dokumen sokongan.</p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="section-title-row">
+        <div>
+          <p class="eyebrow">Senario</p>
+          <h2>Bandingkan Tempoh Pinjaman</h2>
+        </div>
+        <i class="bi bi-bar-chart-line" aria-hidden="true"></i>
+      </div>
+      <div class="table-responsive comparison-table-wrap">
+        <table class="table align-middle" id="comparison-table">
+          <caption>Perbandingan tempoh berdasarkan data semasa pengguna.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Tempoh</th>
+              <th scope="col">Ansuran bulanan</th>
+              <th scope="col">Jumlah faedah</th>
+              <th scope="col">Jumlah keseluruhan bayaran</th>
+              <th scope="col">Penanda</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="content-section" id="amortization-section">
+      <div class="section-title-row">
+        <div>
+          <p class="eyebrow">Rumah</p>
+          <h2>Jadual Amortisasi Ringkas</h2>
+        </div>
+        <i class="bi bi-table" aria-hidden="true"></i>
+      </div>
+      <div class="table-responsive amortization-table-wrap">
+        <table class="table align-middle" id="amortization-table">
+          <caption>Jadual tahunan bagi bayaran prinsipal, faedah dan baki pinjaman.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Tahun</th>
+              <th scope="col">Baki awal</th>
+              <th scope="col">Jumlah bayaran tahunan</th>
+              <th scope="col">Prinsipal dibayar</th>
+              <th scope="col">Faedah dibayar</th>
+              <th scope="col">Baki akhir</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="print-only print-summary" aria-label="Ringkasan cetakan">
+      <h2>Ringkasan Cetakan</h2>
+      <div id="print-summary-content"></div>
+    </section>
+
+    <footer class="disclaimer">
+      <h2>Penafian</h2>
+      <p>Semua keputusan pengiraan yang dipaparkan adalah anggaran sahaja. Jumlah sebenar pinjaman, kadar faedah, kadar keuntungan, caj pemprosesan, insurans, takaful, duti setem dan bayaran bulanan adalah tertakluk kepada syarat institusi kewangan yang berkaitan. Aplikasi ini bukan penasihat kewangan dan tidak menjamin kelulusan pinjaman.</p>
+    </footer>
+  </main>
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3 no-print">
+    <div id="copy-toast" class="toast align-items-center text-bg-dark border-0" role="status" aria-live="polite" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">Ringkasan berjaya disalin.</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Tutup"></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" integrity="sha384-vsrfeLOOY6KuIYKDlmVH5UiBmgIdB1oEf7p01YgWHuqmOHfZr374+odEv96n9tNC" crossorigin="anonymous"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
