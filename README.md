@@ -1,170 +1,92 @@
-# Kalkulator Pinjaman Malaysia
+<div align="center">
 
-Aplikasi web statik untuk laman **ariff.my** bagi mengira anggaran ansuran bulanan pinjaman rumah, kenderaan dan pinjaman peribadi di Malaysia.
+# Loan Calculator Malaysia
 
-Semua pengiraan dilakukan terus dalam pelayar pengguna. Tiada data dihantar ke server dan tiada pangkalan data diperlukan.
+**A simple, responsive loan calculator for everyday financial planning.**
 
-## Fungsi Utama
+Estimate monthly repayments, compare financing terms, and explore repayment breakdowns — directly in your browser.
 
-- Kalkulator Pinjaman Perumahan dengan formula baki berkurangan atau amortisasi.
-- Kalkulator Pinjaman Kenderaan dengan formula kadar rata.
-- Kalkulator Pinjaman Peribadi dengan pilihan kadar rata atau baki berkurangan.
-- Penyelarasan automatik deposit RM, deposit peratus dan jumlah pinjaman.
-- Kad keputusan untuk ansuran bulanan, jumlah pinjaman, faedah, jumlah bayaran dan tempoh.
-- Carta doughnut Chart.js untuk pecahan prinsipal dan faedah.
-- Jadual amortisasi tahunan untuk pinjaman rumah.
-- Perbandingan tempoh pinjaman berdasarkan data semasa pengguna.
-- Anggaran Debt Service Ratio (DSR) berdasarkan pendapatan dan komitmen bulanan.
-- Validasi input dengan mesej ralat inline.
-- Butang kira semula, tetapkan semula, cetak keputusan dan salin ringkasan.
-- CSS cetakan untuk laporan ringkas bersaiz A4.
-- Paparan responsif untuk desktop, tablet dan telefon pintar.
+[Portfolio](https://ariff.my) · [Source Code](https://github.com/ariffmy/loan-calculator)
 
-## Struktur Fail
+</div>
+
+---
+
+## Overview
+
+Loan Calculator Malaysia is a lightweight, browser-based application for estimating **housing, vehicle, and personal loan** repayments. Calculations run locally in the browser; no account, server-side processing, or database is required.
+
+> **Preview:** Add a real application screenshot to `docs/screenshot.png` when available, then embed it here using `![Application screenshot](docs/screenshot.png)`. No screenshot is included in this documentation-only update.
+
+## Features
+
+| Area | Capabilities |
+| :--- | :--- |
+| **Housing loans** | Reducing-balance repayment estimates and annual amortization schedule |
+| **Vehicle loans** | Flat-rate repayment estimates |
+| **Personal loans** | Flat-rate or reducing-balance calculation options |
+| **Financial overview** | Monthly instalment, principal, interest, total repayment, and estimated debt service ratio (DSR) |
+| **Visual insights** | Chart.js principal/interest breakdown and loan-term comparison |
+| **Usability** | Responsive layout, inline validation, reset, print, and copy-summary actions |
+
+## Technology
+
+`HTML` · `CSS` · `JavaScript` · `Bootstrap` · `Chart.js`
+
+No build tools or database are needed.
+
+## Getting Started
+
+1. Clone or download this repository.
+2. Open `index.html` in a modern browser.
+3. Select a loan type, enter the financing details, and calculate.
+
+For conventional static hosting or cPanel, upload the repository files while preserving the directory structure.
 
 ```text
 loan-calculator/
 ├── index.html
 ├── assets/
-│   ├── css/
-│   │   └── style.css
-│   └── js/
-│       └── app.js
+│   ├── css/style.css
+│   └── js/app.js
 └── README.md
 ```
 
-## Cara Pemasangan
+## Calculation Methods
 
-1. Muat naik folder `loan-calculator` ke hosting atau cPanel.
-2. Pastikan struktur fail dikekalkan seperti di atas.
-3. Buka `index.html` melalui pelayar.
-
-Contoh lokasi:
+**Reducing balance (amortized repayment)**
 
 ```text
-public_html/loan-calculator/index.html
+M = P × [r(1 + r)^n] / [(1 + r)^n − 1]
 ```
 
-Selepas dimuat naik, aplikasi boleh diakses melalui:
+Where `M` is the monthly repayment, `P` is the principal, `r` is the monthly interest rate, and `n` is the number of monthly payments. At a zero interest rate, monthly repayment is `P / n`.
+
+**Flat rate**
 
 ```text
-https://ariff.my/loan-calculator/
+Total interest = Principal × Annual rate × Years
+Monthly repayment = (Principal + Total interest) / Months
 ```
 
-## Cara Menjalankan Aplikasi
+Actual bank calculations, financing products, and rounding policies may differ.
 
-Aplikasi ini boleh dibuka terus melalui fail:
+## Customization
 
-```text
-index.html
-```
+- **Default input values:** Edit the `loanMeta` configuration in `assets/js/app.js`.
+- **Theme:** Adjust CSS custom properties in `assets/css/style.css`.
+- **Hosting:** Deploy as static files; adjust asset paths if embedding within another website.
 
-Tiada proses build diperlukan.
+## Privacy
 
-## Formula Yang Digunakan
+Loan inputs and calculations are handled in the browser. This application does not require a database or send entered loan details to an application backend. Third-party frontend dependencies may still be loaded according to the page's configured asset URLs.
 
-### Pinjaman Baki Berkurangan
+## Disclaimer
 
-Digunakan untuk pinjaman rumah dan pilihan baki berkurangan bagi pinjaman peribadi.
+All results are **estimates for informational purposes only**, not financial advice or a loan approval decision. Actual interest/profit rates, charges, insurance/takaful, stamp duty, and repayment amounts depend on the financing institution and product terms.
 
-```text
-M = P x [r(1+r)^n] / [(1+r)^n - 1]
-```
+---
 
-Dengan:
-
-- `M` = ansuran bulanan
-- `P` = jumlah pinjaman
-- `r` = kadar faedah bulanan
-- `n` = jumlah bulan
-
-Jika kadar faedah ialah `0%`, ansuran dikira sebagai:
-
-```text
-Jumlah pinjaman / jumlah bulan
-```
-
-### Pinjaman Kadar Rata
-
-Digunakan untuk pinjaman kenderaan dan pilihan kadar rata bagi pinjaman peribadi.
-
-```text
-Jumlah faedah = Jumlah pinjaman x kadar faedah x tempoh tahun
-Jumlah bayaran = Jumlah pinjaman + jumlah faedah
-Ansuran bulanan = Jumlah bayaran / jumlah bulan
-```
-
-## Cara Menukar Nilai Lalai
-
-Buka fail:
-
-```text
-assets/js/app.js
-```
-
-Cari objek `loanMeta`, kemudian ubah nilai dalam bahagian `defaultValues`.
-
-Contoh untuk pinjaman rumah:
-
-```javascript
-defaultValues: {
-  price: 500000,
-  deposit: 50000,
-  rate: 4.2,
-  years: 30,
-  loan: 450000
-}
-```
-
-## Cara Menukar Warna Tema
-
-Buka fail:
-
-```text
-assets/css/style.css
-```
-
-Ubah pemboleh ubah CSS di bahagian `:root`.
-
-Contoh:
-
-```css
-:root {
-  --primary: #0f766e;
-  --primary-dark: #115e59;
-  --accent: #2f6f9f;
-}
-```
-
-## Cara Memasukkan Ke Dalam Laman ariff.my
-
-Pilihan paling mudah ialah memuat naik folder ini sebagai subfolder:
-
-```text
-public_html/loan-calculator/
-```
-
-Kemudian pautkan dari laman utama ariff.my ke:
-
-```text
-/loan-calculator/
-```
-
-Jika mahu memasukkan aplikasi ke dalam halaman sedia ada, salin kandungan utama daripada `index.html`, kemudian pastikan pautan CSS dan JavaScript ini turut dimasukkan:
-
-```html
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-<link href="assets/css/style.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
-<script src="assets/js/app.js"></script>
-```
-
-Laraskan laluan `assets/css/style.css` dan `assets/js/app.js` jika fail diletakkan di lokasi berbeza.
-
-## Penafian Penggunaan
-
-Semua keputusan pengiraan yang dipaparkan adalah anggaran sahaja. Jumlah sebenar pinjaman, kadar faedah, kadar keuntungan, caj pemprosesan, insurans, takaful, duti setem dan bayaran bulanan adalah tertakluk kepada syarat institusi kewangan yang berkaitan.
-
-Aplikasi ini bukan penasihat kewangan dan tidak menjamin kelulusan pinjaman.
+<div align="center">
+  <sub>Built by <a href="https://ariff.my">ariff.my</a> · Design with purpose. Build with simplicity.</sub>
+</div>
