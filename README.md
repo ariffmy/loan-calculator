@@ -16,7 +16,9 @@ Estimate monthly repayments, compare financing terms, and explore repayment brea
 
 Loan Calculator Malaysia is a lightweight, browser-based application for estimating **housing, vehicle, and personal loan** repayments. Calculations run locally in the browser; no account, server-side processing, or database is required.
 
-> **Preview:** Add a real application screenshot to `docs/screenshot.png` when available, then embed it here using `![Application screenshot](docs/screenshot.png)`. No screenshot is included in this documentation-only update.
+## Application Preview
+
+![Loan Calculator Malaysia](docs/screenshot.png)
 
 ## Features
 
